@@ -11,6 +11,7 @@ function draw() {
     shipState();
     drawShip();
     moveShip();
+    borderCollision();
     }
 function desenhaCenario() {
     fill(30);
