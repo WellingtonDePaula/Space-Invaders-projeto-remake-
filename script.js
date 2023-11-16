@@ -2,7 +2,7 @@ var windowWidth = innerWidth;
 var windowHeight = innerHeight;
 
 function setup() {
-    createCanvas(windowWidth, windowHeight);
+    createCanvas(windowWidth, windowHeight - 1);
 }
 function draw() {
     

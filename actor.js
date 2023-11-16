@@ -8,7 +8,7 @@ var ship = {
     height: 80,
 
     x: windowWidth/2 - 70/2,
-    y: windowHeight/2 - 80/2,
+    y: 600,
 
     futureX: 0,
 
@@ -20,8 +20,18 @@ var ship = {
 var shotC = {
     width: 10,
     height: 50,
-    shotPos: [],
-    velv: 5,
+    pos: [],
+}
+
+class Rectangle {
+    constructor(x, y, width, height, velv, max_velv){
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.velv = velv;
+        this.max_velv = max_velv;
+    }
 }
 
 /////////////////////////////
@@ -87,29 +97,24 @@ ship.futureX = ship.x + ship.keyPressed*ship.max_velh;
 
 function keyTyped(){
     if(key === 'z'){
-        shotC.shotPos.push([ship.x, ship.y]);
+        shotC.pos.push([ship.x, ship.y]);
     }
 }
 
 function drawShot() {
 
-    for(i = 0; i < shotC.shotPos.length; i++){
+    for(var i = 0; i < shotC.pos.length; i++){
 
-        let shotX = shotC.shotPos[i][0];
-        let shotY = shotC.shotPos[i][1];
+        var shot = new Rectangle(shotC.pos[i][0], shotC.pos[i][1], shotC.width, shotC.height, 10, 10);
 
-        if(shotY < -10){
-            shotC.shotPos.shift();
+        fill(255);
+
+        shot.y -= shot.velv;
+
+        if(shotC.pos[i][1] <= -20){
+            shotC.pos.shift();
         }
 
-        //não sei como fazer :(
-        shotY -= shotC.velv;
-        //não sei como fazer :(
-
-        rect(shotX  + ship.width/2 - 5, shotY - ship.height/2 - 15, shotC.width, shotC.height);
-
-        console.log(shotY)
-
+        rect(shot.x + ship.width/2 - 5, shot.y - ship.height/2 - 12, shot.width, shot.height);
     }
-
 }
