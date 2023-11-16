@@ -109,12 +109,13 @@ function drawShot() {
 
         fill(255);
 
-        shot.y -= shot.velv;
+        shotC.pos[i][1] -= shot.velv;
 
         if(shotC.pos[i][1] <= -20){
             shotC.pos.shift();
         }
 
         rect(shot.x + ship.width/2 - 5, shot.y - ship.height/2 - 12, shot.width, shot.height);
+        
     }
 }
