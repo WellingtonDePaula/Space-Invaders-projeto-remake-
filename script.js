@@ -15,6 +15,7 @@ function draw() {
     borderCollision();
     drawShot();
 
+    drawEnemy();
     }
 function drawCenario() {
     fill(30);

@@ -18,24 +18,32 @@ var ship = {
 
 }
 var shotC = {
-    width: 10,
-    height: 50,
+    width: 9,
+    height: 51,
     pos: [],
+    velv: 10,
 }
 
-class Rectangle {
-    constructor(x, y, width, height, velv, max_velv){
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        this.velv = velv;
-        this.max_velv = max_velv;
-    }
+var specialShot = {
+    width: 30,
+    height: 70,
+    pos: [],
+    velv: 6,
 }
 
 /////////////////////////////
 
+class Rectangle {
+    constructor(x, y, width, height){
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+    }
+}
+
+/////////////////////////////
+//the ship state(here is the state of the ship)
 function shipState(){
     switch(ship.state){
         case "idle":
@@ -58,13 +66,13 @@ function shipState(){
 }
 
 /////////////////////////////
-
+//draw the ship
 function drawShip(){
     image(shipImage, ship.x, ship.y, ship.width, ship.height);
 }
 
 /////////////////////////////
-
+//move the ship
 function moveShip(){
 
     ship.right = 0;
@@ -85,7 +93,7 @@ function moveShip(){
 }
 
 /////////////////////////////
-
+//ship collision with the borders
 function borderCollision(){
 ship.futureX = ship.x + ship.keyPressed*ship.max_velh;
     if(ship.futureX <= 200 || ship.futureX >= 1155+ship.width){
@@ -94,28 +102,62 @@ ship.futureX = ship.x + ship.keyPressed*ship.max_velh;
 }
 
 /////////////////////////////
-
+//input keys
 function keyTyped(){
     if(key === 'z'){
         shotC.pos.push([ship.x, ship.y]);
     }
+
+    if(key === 'x'){
+        specialShot.pos.push([ship.x, ship.y]);
+    }
+
 }
+
+/////////////////////////////
 
 function drawShot() {
 
-    for(var i = 0; i < shotC.pos.length; i++){
+    for(i = 0; i < shotC.pos.length; i++){
 
-        var shot = new Rectangle(shotC.pos[i][0], shotC.pos[i][1], shotC.width, shotC.height, 10, 10);
+        let shot = new Rectangle(shotC.pos[i][0], shotC.pos[i][1], shotC.width, shotC.height);
 
-        fill(255);
-
-        shotC.pos[i][1] -= shot.velv;
+        shotC.pos[i][1] -= shotC.velv;
 
         if(shotC.pos[i][1] <= -20){
             shotC.pos.shift();
         }
 
-        rect(shot.x + ship.width/2 - 5, shot.y - ship.height/2 - 12, shot.width, shot.height);
+        image(shotImage, shot.x + ship.width/2 - 5, shot.y - ship.height/2 - 12, shot.width, shot.height);
+        
+        //enemy collision with shot
+
+        for(j = 0; j < enemy.pos.length; j++) {
+            if(shotC.pos.length != 0) {
+                if(enemy.pos[j][0] + enemy.width/2 >= shotC.pos[i][0] && enemy.pos[j][0] - enemy.width <= shotC.pos[i][0] && enemy.pos[j][1] + enemy.height >= shotC.pos[i][1] - shotC.height + 10) {
+                    shotC.pos.splice(i, 1);
+                    enemy.pos.splice(j, 1);
+                }
+            }
+        }
+
+        ////////////////////////////////
+    }
+
+    for(i = 0; i < specialShot.pos.length; i ++){
+
+        let shot = new Rectangle(specialShot.pos[i][0], specialShot.pos[i][1], specialShot.width, specialShot.height);
+
+        specialShot.pos[i][1] -= specialShot.velv;
+
+        if(specialShot.pos[i][1] <= -20){
+            specialShot.pos.shift();
+        }
+
+        image(shotImage, shot.x + ship.width/2 - 15, shot.y - ship.height/2 - 15, shot.width, shot.height);
         
     }
 }
+
+/////////////////////////////
+
