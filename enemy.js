@@ -1,9 +1,10 @@
 enemy = {
-    pos: [[500, 300]],
+    pos: [[500, 125]],
     width: 40,
     height: 40,
 }
 
+//draw the enemy(s)
 function drawEnemy(){
 
     for(i = 0; i < enemy.pos.length; i++){

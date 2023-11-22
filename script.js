@@ -16,6 +16,10 @@ function draw() {
     drawShot();
 
     drawEnemy();
+
+    ////////obstacles
+    drawOtherShip();
+    moveOtherShip();
     }
 function drawCenario() {
     fill(30);

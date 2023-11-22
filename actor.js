@@ -134,7 +134,7 @@ function drawShot() {
 
         for(j = 0; j < enemy.pos.length; j++) {
             if(shotC.pos.length != 0) {
-                if(enemy.pos[j][0] + enemy.width/2 >= shotC.pos[i][0] && enemy.pos[j][0] - enemy.width <= shotC.pos[i][0] && enemy.pos[j][1] + enemy.height >= shotC.pos[i][1] - shotC.height + 10) {
+                if(enemy.pos[j][0] + enemy.width/2 - 5 >= shotC.pos[i][0] && enemy.pos[j][0] - enemy.width <= shotC.pos[i][0] && enemy.pos[j][1] + enemy.height >= shotC.pos[i][1] - shotC.height + 10) {
                     shotC.pos.splice(i, 1);
                     enemy.pos.splice(j, 1);
                 }
@@ -142,6 +142,12 @@ function drawShot() {
         }
 
         ////////////////////////////////
+
+        if(shotC.pos.length != 0) {
+            if(otherShip.x + otherShip.width/2 >= shotC.pos[i][0] && otherShip.x - otherShip.width/2 <= shotC.pos[i][0] && otherShip.y + otherShip.height >= shotC.pos[i][1] - shotC.height + 10 && otherShip.y + otherShip.height <= shotC.pos[i][1]){
+                shotC.pos.splice(i, 1);
+            }
+        }
     }
 
     for(i = 0; i < specialShot.pos.length; i ++){
@@ -160,4 +166,3 @@ function drawShot() {
 }
 
 /////////////////////////////
-
