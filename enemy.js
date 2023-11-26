@@ -1,9 +1,13 @@
-enemy = {
-    pos: [[500, 125]],
+var enemy = {
+    pos: [[215, 125]],
+    possiblePos: [[215, 125]],
     width: 40,
     height: 40,
 }
 
+function createEnemyPos() {
+
+}
 //draw the enemy(s)
 function drawEnemy(){
 

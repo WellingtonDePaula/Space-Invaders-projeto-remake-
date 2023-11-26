@@ -2,7 +2,9 @@ var windowWidth = innerWidth;
 var windowHeight = innerHeight;
 
 function setup() {
-    createCanvas(windowWidth, windowHeight - 1);
+
+    createCanvas(windowWidth, windowHeight);
+
 }
 function draw() {
     
@@ -15,6 +17,7 @@ function draw() {
     borderCollision();
     drawShot();
 
+    createEnemyPos();
     drawEnemy();
 
     ////////obstacles

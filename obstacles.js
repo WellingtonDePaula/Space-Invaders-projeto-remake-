@@ -26,5 +26,4 @@ function moveOtherShip() {
     if(otherShip.x <= -250) {
         otherShip.x = windowWidth + 500;
     }
-    console.log(windowWidth);
 }

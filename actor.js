@@ -32,17 +32,6 @@ var specialShot = {
 }
 
 /////////////////////////////
-
-class Rectangle {
-    constructor(x, y, width, height){
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-    }
-}
-
-/////////////////////////////
 //the ship state(here is the state of the ship)
 function shipState(){
     switch(ship.state){
